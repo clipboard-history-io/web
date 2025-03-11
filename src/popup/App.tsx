@@ -4,46 +4,34 @@ import {
   Divider,
   Group,
   Image,
-  Indicator,
   rem,
   SegmentedControl,
   Stack,
-  Switch,
   Text,
   TextInput,
   Title,
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
-import { modals } from "@mantine/modals";
 import {
-  IconClipboardList,
   IconCloud,
   IconExternalLink,
   IconHeart,
   IconHelp,
   IconNews,
-  IconPictureInPicture,
   IconSearch,
-  IconSettings,
   IconStar,
 } from "@tabler/icons-react";
-import iconSrc from "data-base64:~assets/icon.png";
 import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
 import { match } from "ts-pattern";
 
-import { updateChangelogViewedAt } from "~storage/changelogViewedAt";
-import { toggleClipboardMonitorIsEnabled } from "~storage/clipboardMonitorIsEnabled";
 import { Tab } from "~types/tab";
 import db from "~utils/db/react";
-import { defaultBorderColor, lightOrDark } from "~utils/sx";
-import { VERSION } from "~utils/version";
+import { defaultBorderColor } from "~utils/sx";
 
 import { ProBadge } from "./components/cloud/ProBadge";
 import { UserActionIcon } from "./components/cloud/UserActionIcon";
-import { SettingsModalContent } from "./components/modals/SettingsModalContent";
-import { useApp } from "./hooks/useApp";
 import { useCloudEntriesQuery } from "./hooks/useCloudEntriesQuery";
 import { useCloudFavoritedEntriesQuery } from "./hooks/useCloudFavoritedEntriesQuery";
 import { useCloudTaggedEntriesQuery } from "./hooks/useCloudTaggedEntriesQuery";
@@ -51,30 +39,21 @@ import { useSubscriptionsQuery } from "./hooks/useSubscriptionsQuery";
 import { AllPage } from "./pages/AllPage";
 import { CloudPage } from "./pages/CloudPage";
 import { FavoritesPage } from "./pages/FavoritesPage";
-import {
-  changelogViewedAtAtom,
-  clipboardMonitorIsEnabledAtom,
-  refreshTokenAtom,
-  searchAtom,
-  settingsAtom,
-  tabAtom,
-} from "./states/atoms";
+import { refreshTokenAtom, searchAtom, tabAtom } from "./states/atoms";
 
 export const App = () => {
-  useApp();
+  // useApp();
 
   const theme = useMantineTheme();
 
-  const [isFloatingPopup] = useState(
-    new URLSearchParams(window.location.search).get("ref") === "popup",
-  );
+  const [isFloatingPopup] = useState(true);
 
   const [search, setSearch] = useAtom(searchAtom);
   const [tab, setTab] = useAtom(tabAtom);
 
-  const clipboardMonitorIsEnabled = useAtomValue(clipboardMonitorIsEnabledAtom);
-  const settings = useAtomValue(settingsAtom);
-  const changelogViewedAt = useAtomValue(changelogViewedAtAtom);
+  // const clipboardMonitorIsEnabled = useAtomValue(clipboardMonitorIsEnabledAtom);
+  // const settings = useAtomValue(settingsAtom);
+  // const changelogViewedAt = useAtomValue(changelogViewedAtAtom);
   const refreshToken = useAtomValue(refreshTokenAtom);
 
   // Preload queries.
@@ -85,9 +64,9 @@ export const App = () => {
   const cloudTaggedEntriesQuery = useCloudTaggedEntriesQuery();
   const subscriptionsQuery = useSubscriptionsQuery();
 
-  if (clipboardMonitorIsEnabled === undefined || refreshToken === undefined) {
-    return null;
-  }
+  // if (clipboardMonitorIsEnabled === undefined || refreshToken === undefined) {
+  //   return null;
+  // }
 
   if (refreshToken && connectionStatus !== "closed") {
     if (
@@ -106,7 +85,7 @@ export const App = () => {
       <Stack h="100%" spacing="sm">
         <Group align="center" position="apart">
           <Group align="center" spacing="xs">
-            <Image src={iconSrc} maw={28} />
+            <Image src="/icon.png" maw={28} />
             <Title order={6}>Clipboard History IO</Title>
             <ProBadge />
           </Group>
@@ -119,29 +98,15 @@ export const App = () => {
                 </Group>
               }
             >
-              <Indicator
-                color={lightOrDark(theme, "red.5", "red.7")}
-                size={8}
-                disabled={!settings.changelogIndicator || changelogViewedAt === VERSION}
+              <ActionIcon
+                variant="light"
+                color="indigo.5"
+                component="a"
+                href="https://github.com/ayoung19/clipboard-history/releases"
+                target="_blank"
               >
-                <ActionIcon
-                  variant="light"
-                  color="indigo.5"
-                  onClick={async () => {
-                    await updateChangelogViewedAt();
-
-                    await chrome.tabs.create({
-                      url: "https://github.com/ayoung19/clipboard-history/releases",
-                    });
-
-                    if (!isFloatingPopup) {
-                      window.close();
-                    }
-                  }}
-                >
-                  <IconNews size="1.125rem" />
-                </ActionIcon>
-              </Indicator>
+                <IconNews size="1.125rem" />
+              </ActionIcon>
             </Tooltip>
             <Tooltip
               label={
@@ -180,7 +145,7 @@ export const App = () => {
               </ActionIcon>
             </Tooltip>
             <Divider orientation="vertical" h={16} sx={{ alignSelf: "inherit" }} />
-            <Tooltip label={<Text fz="xs">Floating Mode</Text>} disabled={isFloatingPopup}>
+            {/* <Tooltip label={<Text fz="xs">Floating Mode</Text>} disabled={isFloatingPopup}>
               <ActionIcon
                 variant="light"
                 color="indigo.5"
@@ -214,15 +179,15 @@ export const App = () => {
               >
                 <IconSettings size="1.125rem" />
               </ActionIcon>
-            </Tooltip>
+            </Tooltip> */}
             <UserActionIcon />
-            <Divider orientation="vertical" h={16} sx={{ alignSelf: "inherit" }} />
+            {/* <Divider orientation="vertical" h={16} sx={{ alignSelf: "inherit" }} />
             <Switch
               size="md"
               color="indigo.5"
               checked={clipboardMonitorIsEnabled}
               onChange={() => toggleClipboardMonitorIsEnabled()}
-            />
+            /> */}
           </Group>
         </Group>
         <Group align="center" position="apart">
@@ -256,11 +221,11 @@ export const App = () => {
               {
                 label: (
                   <Group align="center" spacing={4} noWrap>
-                    <IconClipboardList size="1rem" />
-                    <Text>All</Text>
+                    <IconCloud size="1rem" />
+                    <Text>Cloud</Text>
                   </Group>
                 ),
-                value: Tab.Enum.All,
+                value: Tab.Enum.Cloud,
               },
               {
                 label: (
@@ -270,15 +235,6 @@ export const App = () => {
                   </Group>
                 ),
                 value: Tab.Enum.Favorites,
-              },
-              {
-                label: (
-                  <Group align="center" spacing={4} noWrap>
-                    <IconCloud size="1rem" />
-                    <Text>Cloud</Text>
-                  </Group>
-                ),
-                value: Tab.Enum.Cloud,
               },
             ]}
           />

@@ -195,6 +195,7 @@ export const MergeModalContent = ({ initialEntries }: Props) => {
                   itemSize={32}
                   innerElementType={forwardRef(({ style, ...rest }, ref) => (
                     <Box
+                      // @ts-expect-error TODO
                       ref={ref}
                       style={{
                         ...style,

@@ -8,7 +8,7 @@ import { defaultSettings, Settings } from "~types/settings";
 import { Tab } from "~types/tab";
 
 export const searchAtom = atom<string>("");
-export const tabAtom = atom<Tab>(Tab.Enum.All);
+export const tabAtom = atom<Tab>(Tab.Enum.Cloud);
 export const transitioningEntryContentHashAtom = atom<string>();
 
 export const clipboardMonitorIsEnabledAtom = atom<boolean>();
@@ -30,4 +30,4 @@ export const changelogViewedAtAtom = atom<string>();
 export const entryCommandsAtom = atom<EntryCommand[]>([]);
 export const commandsAtom = atom<{ name: string; shortcut?: string }[]>([]);
 
-export const refreshTokenAtom = atom<string | null>();
+export const refreshTokenAtom = atom<string | null>("arbitrary string");

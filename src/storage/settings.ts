@@ -1,10 +1,10 @@
-import { Storage } from "@plasmohq/storage";
+// import { Storage } from "@plasmohq/storage";
 
 import { defaultSettings, Settings } from "~types/settings";
 
-const storage = new Storage({
-  area: "local",
-});
+// const storage = new Storage({
+//   area: "local",
+// });
 
 export const watchSettings = (cb: (settings: Settings) => void) => {
   return storage.watch({

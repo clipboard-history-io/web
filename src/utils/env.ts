@@ -1,10 +1,10 @@
-const INSTANT_APP_ID = process.env.PLASMO_PUBLIC_INSTANT_APP_ID;
+const INSTANT_APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID;
 
 if (!INSTANT_APP_ID) {
   throw new Error("missing instant app id");
 }
 
-const BASE_URL = process.env.PLASMO_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 if (!BASE_URL) {
   throw new Error("missing base url");

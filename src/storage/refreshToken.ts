@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-import { Storage } from "@plasmohq/storage";
+// import { Storage } from "@plasmohq/storage";
 
-const storage = new Storage({
-  area: "local",
-});
+// const storage = new Storage({
+//   area: "local",
+// });
 
 // Do not change this without a migration.
 const REFRESH_TOKEN_STORAGE_KEY = "refreshToken";

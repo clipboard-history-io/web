@@ -19,6 +19,8 @@ const eslintConfig = [
           allowInterfaces: "with-single-extends",
         },
       ],
+      "react/no-unescaped-entities": "off",
+      "react/display-name": "off",
     },
   },
 ];

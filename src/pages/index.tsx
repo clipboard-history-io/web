@@ -18,6 +18,7 @@ import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
+import { App } from "~popup/App";
 import db from "~utils/db/react";
 import env from "~utils/env";
 
@@ -115,7 +116,7 @@ export default function Page() {
 
   return auth.user ? (
     subscriptionsQueryIsLoading ? null : (
-      <Text size="xs">Success! You may close this window.</Text>
+      <App />
     )
   ) : (
     <Center h="100%">

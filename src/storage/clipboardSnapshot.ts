@@ -1,10 +1,10 @@
-import { Storage } from "@plasmohq/storage";
+// import { Storage } from "@plasmohq/storage";
 
 import { ClipboardSnapshot } from "~types/clipboardSnapshot";
 
-const storage = new Storage({
-  area: "local",
-});
+// const storage = new Storage({
+//   area: "local",
+// });
 
 export const watchClipboardSnapshot = (cb: (clipboardSnapshot?: ClipboardSnapshot) => void) => {
   return storage.watch({

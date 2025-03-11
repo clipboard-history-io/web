@@ -34,7 +34,8 @@ export const CloudPage = () => {
               size="xs"
               mt="xs"
               component="a"
-              href={chrome.runtime.getURL("/tabs/sign-in.html")}
+              // TODO: Add correct link here.
+              // href={chrome.runtime.getURL("/tabs/sign-in.html")}
               target="_blank"
             >
               Get Started
@@ -60,7 +61,8 @@ export const CloudPage = () => {
               size="xs"
               mt="xs"
               component="a"
-              href={chrome.runtime.getURL("/tabs/sign-in.html")}
+              // TODO: Add correct link here.
+              // href={chrome.runtime.getURL("/tabs/sign-in.html")}
               target="_blank"
             >
               Get Started

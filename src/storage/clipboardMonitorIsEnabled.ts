@@ -1,13 +1,13 @@
-import { Storage } from "@plasmohq/storage";
+// import { Storage } from "@plasmohq/storage";
 
 import { setActionIconAndBadgeBackgroundColor } from "~utils/actionBadge";
 
 // Do not change this without a migration.
 const CLIPBOARD_MONITOR_IS_ENABLED_STORAGE_KEY = "clipboardMonitorIsEnabled";
 
-const storage = new Storage({
-  area: "local",
-});
+// const storage = new Storage({
+//   area: "local",
+// });
 
 export const watchClipboardMonitorIsEnabled = (
   cb: (clipboardMonitorIsEnabled: boolean) => void,

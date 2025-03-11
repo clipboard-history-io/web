@@ -38,6 +38,7 @@ export const EntryCloudAction = ({ entry }: Props) => {
 
   return (
     <CommonActionIcon
+      disabled={true}
       color={isCloudEntry ? theme.colors.cyan[5] : undefined}
       hoverColor={isCloudEntry ? theme.colors.cyan[5] : undefined}
       onClick={() => {

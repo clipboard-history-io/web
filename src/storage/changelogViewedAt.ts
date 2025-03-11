@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-import { Storage } from "@plasmohq/storage";
+// import { Storage } from "@plasmohq/storage";
 
 import { VERSION } from "~utils/version";
 
-const storage = new Storage({
-  area: "local",
-});
+// const storage = new Storage({
+//   area: "local",
+// });
 
 // Do not change this without a migration.
 const CHANGELOG_VIEWED_AT_STORAGE_KEY = "changelogViewedAt";

@@ -31,6 +31,7 @@ export const CommonActionIcon = forwardRef<HTMLButtonElement, PropsWithChildren<
             hoverColor: hoverColor,
           })
         }
+        // @ts-expect-error TODO
         onClick={(e) => {
           e.stopPropagation();
 

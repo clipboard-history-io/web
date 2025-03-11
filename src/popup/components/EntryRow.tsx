@@ -1,12 +1,12 @@
 import { Badge, Checkbox, Divider, Group, rem, Stack, Text, useMantineTheme } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import { IconEdit, IconKeyboard } from "@tabler/icons-react";
+import { notifications } from "@mantine/notifications";
+import { IconEdit } from "@tabler/icons-react";
 import { useAtom, useAtomValue } from "jotai";
 
 import { useEntryIdToTags } from "~popup/contexts/EntryIdToTagsContext";
 import { useNow } from "~popup/hooks/useNow";
 import { clipboardSnapshotAtom, commandsAtom, entryCommandsAtom } from "~popup/states/atoms";
-import { updateClipboardSnapshot } from "~storage/clipboardSnapshot";
 import type { Entry } from "~types/entry";
 import { badgeDateFormatter } from "~utils/date";
 import { defaultBorderColor, lightOrDark } from "~utils/sx";
@@ -16,7 +16,6 @@ import { CommonActionIcon } from "./CommonActionIcon";
 import { EntryDeleteAction } from "./EntryDeleteAction";
 import { EntryFavoriteAction } from "./EntryFavoriteAction";
 import { EditEntryModalContent } from "./modals/EditEntryModalContent";
-import { ShortcutsModalContent } from "./modals/ShortcutsModalContent";
 import { ShortcutBadge } from "./ShortcutBadge";
 import { TagBadge } from "./TagBadge";
 import { TagSelect } from "./TagSelect";
@@ -32,7 +31,7 @@ export const EntryRow = ({ entry, selectedEntryIds }: Props) => {
   const entryIdToTags = useEntryIdToTags();
   const entryCommands = useAtomValue(entryCommandsAtom);
   const commands = useAtomValue(commandsAtom);
-  const [clipboardSnapshot, setClipboardSnapshot] = useAtom(clipboardSnapshotAtom);
+  const [clipboardSnapshot] = useAtom(clipboardSnapshotAtom);
 
   const commandName = entryCommands.find(
     (entryCommand) => entryCommand.entryId === entry.id,
@@ -60,10 +59,16 @@ export const EntryRow = ({ entry, selectedEntryIds }: Props) => {
       })}
       onClick={async () => {
         // Optimistically update local state with arbitrary updatedAt.
-        setClipboardSnapshot({ content: entry.content, updatedAt: 0 });
+        // setClipboardSnapshot({ content: entry.content, updatedAt: 0 });
 
-        await updateClipboardSnapshot(entry.content);
-        navigator.clipboard.writeText(entry.content);
+        // await updateClipboardSnapshot(entry.content);
+        await navigator.clipboard.writeText(entry.content);
+
+        notifications.show({
+          color: "green",
+          title: "Success",
+          message: "Item was successfully copied.",
+        });
       }}
     >
       <Group align="center" spacing={0} noWrap px="sm" h={32}>
@@ -123,7 +128,7 @@ export const EntryRow = ({ entry, selectedEntryIds }: Props) => {
         </Text>
         <Group align="center" spacing={0} noWrap ml={rem(4)}>
           <TagSelect entryId={entry.id} />
-          <CommonActionIcon
+          {/* <CommonActionIcon
             onClick={() =>
               modals.open({
                 padding: 0,
@@ -134,7 +139,7 @@ export const EntryRow = ({ entry, selectedEntryIds }: Props) => {
             }
           >
             <IconKeyboard size="1rem" />
-          </CommonActionIcon>
+          </CommonActionIcon> */}
           <CommonActionIcon
             onClick={() =>
               modals.open({

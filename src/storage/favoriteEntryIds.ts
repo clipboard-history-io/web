@@ -1,13 +1,13 @@
 import { z } from "zod";
 
-import { Storage } from "@plasmohq/storage";
+// import { Storage } from "@plasmohq/storage";
 
 import db from "~utils/db/core";
 import { handleEntryIds } from "~utils/entries";
 
-const storage = new Storage({
-  area: "local",
-});
+// const storage = new Storage({
+//   area: "local",
+// });
 
 export const watchFavoriteEntryIds = (cb: (entryIds: string[]) => void) => {
   return storage.watch({
