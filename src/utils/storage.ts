@@ -3,7 +3,7 @@ import { lookup } from "@instantdb/core";
 import { Err, Ok, Result } from "ts-results";
 import { z } from "zod";
 
-// import { Storage } from "@plasmohq/storage";
+import { Storage } from "@plasmohq/storage";
 
 // import { handleUpdateTotalItemsBadgeRequest } from "~background/messages/updateTotalItemsBadge";
 import { _setEntryCommands, deleteEntryCommands, getEntryCommands } from "~storage/entryCommands";
@@ -28,9 +28,9 @@ import { applyLocalItemLimit, handleEntryIds } from "./entries";
 // Do not change this without a migration.
 const ENTRIES_STORAGE_KEY = "entryIdSetentries";
 
-// const storage = new Storage({
-//   area: "local",
-// });
+const storage = new Storage({
+  area: "local",
+});
 
 // Entries are not parsed to optimize for performance. This means corrupted entries will break the
 // extension.
@@ -64,7 +64,7 @@ export const getEntries = async () => {
 export const _setEntries = async (entries: Entry[]) => {
   await Promise.all([
     storage.set(ENTRIES_STORAGE_KEY, entries),
-    handleUpdateTotalItemsBadgeRequest(entries.length),
+    // handleUpdateTotalItemsBadgeRequest(entries.length),
   ]);
 };
 

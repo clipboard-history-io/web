@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// import { Storage } from "@plasmohq/storage";
+import { Storage } from "@plasmohq/storage";
 
 import { EntryIdToTags } from "~types/entryIdToTags";
 import db from "~utils/db/core";
@@ -8,9 +8,9 @@ import db from "~utils/db/core";
 // Do not change this without a migration.
 const ENTRY_ID_TO_TAGS_STORAGE_KEY = "entryIdToTags";
 
-// const storage = new Storage({
-//   area: "local",
-// });
+const storage = new Storage({
+  area: "local",
+});
 
 export const watchEntryIdToTags = (cb: (entryIdToTags: EntryIdToTags) => void) => {
   return storage.watch({

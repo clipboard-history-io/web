@@ -116,6 +116,7 @@ export const TagSelect = ({ entryId }: Props) => {
         />
         <Divider sx={(theme) => ({ borderColor: defaultBorderColor(theme) })} />
         {/* https://github.com/creativetimofficial/material-tailwind/issues/528 */}
+        {/* @ts-expect-error TODO */}
         <ScrollArea.Autosize placeholder={undefined} mah={200} p={rem(4)} ref={scrollAreaRef}>
           <Stack spacing={0}>
             {matchedTags.map((tag, i) => (

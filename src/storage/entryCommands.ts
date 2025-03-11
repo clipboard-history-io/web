@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-// import { Storage } from "@plasmohq/storage";
+import { Storage } from "@plasmohq/storage";
 
 import { EntryCommand } from "~types/entryCommand";
 
-// const storage = new Storage({
-//   area: "local",
-// });
+const storage = new Storage({
+  area: "local",
+});
 
 // Do not change this without a migration.
 const ENTRY_COMMANDS_STORAGE_KEY = "entryCommands";
