@@ -1,5 +1,4 @@
 import type { MantineThemeOverride } from "@mantine/core";
-
 import { useColorScheme } from "@mantine/hooks";
 
 export const useTheme = () => {

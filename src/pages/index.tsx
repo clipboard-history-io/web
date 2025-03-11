@@ -1,3 +1,5 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "@instantdb/react";
 import {
   ActionIcon,
   Button,
@@ -10,18 +12,14 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
+import { IconPencilMinus } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { match } from "ts-pattern";
-
-import db from "@/utils/db";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { IconPencilMinus } from "@tabler/icons-react";
 import { z } from "zod";
 
-import { User } from "@instantdb/react";
-import env from "@/utils/env";
+import db from "~utils/db/react";
+import env from "~utils/env";
 
 const schema = z.object({
   email: z.string(),
@@ -33,8 +31,7 @@ export default function Page() {
   const auth = db.useAuth();
 
   const [step, setStep] = useState<0 | 1>(0);
-  const [subscriptionsQueryIsLoading, setSubscriptionsQueryIsLoading] =
-    useState(true);
+  const [subscriptionsQueryIsLoading, setSubscriptionsQueryIsLoading] = useState(true);
 
   const {
     control,
@@ -128,12 +125,7 @@ export default function Page() {
             {match(step)
               .with(0, () => (
                 <Stack align="center" spacing={0}>
-                  <Image
-                    src="/icon.png"
-                    maw={32}
-                    mb="md"
-                    alt="Clipboard History IO Logo"
-                  />
+                  <Image src="/icon.png" maw={32} mb="md" alt="Clipboard History IO Logo" />
                   <Text fw="bold" mb={2}>
                     Sign in to Clipboard History IO Pro
                   </Text>
