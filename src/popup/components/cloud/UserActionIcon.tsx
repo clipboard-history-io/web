@@ -10,7 +10,7 @@ export const UserActionIcon = () => {
   const connectionStatus = db.useConnectionStatus();
   const [opened, setOpened] = useState(false);
 
-  if (!auth.user || connectionStatus === "closed") {
+  if (!auth.user) {
     return null;
   }
 
@@ -18,7 +18,7 @@ export const UserActionIcon = () => {
     <Menu position="bottom-end" shadow="md" opened={opened} onChange={setOpened}>
       <Menu.Target>
         <Tooltip label={<Text fz="xs">Profile</Text>} disabled={opened}>
-          <ActionIcon variant="light" color="indigo.5">
+          <ActionIcon variant="light" color="indigo.5" disabled={connectionStatus === "closed"}>
             <IconUserCircle size="1.125rem" />
           </ActionIcon>
         </Tooltip>

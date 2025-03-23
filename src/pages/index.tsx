@@ -87,37 +87,35 @@ export default function Page() {
       .exhaustive();
   };
 
-  const redirectIfNotSubsribed = async (user: User) => {
-    const { data } = await db.queryOnce({
-      subscriptions: {},
-    });
+  // const redirectIfNotSubsribed = async (user: User) => {
+  //   const { data } = await db.queryOnce({
+  //     subscriptions: {},
+  //   });
 
-    // Only show success message if the user already has an active subscription.
-    if (data.subscriptions.length) {
-      setSubscriptionsQueryIsLoading(false);
+  //   // Only show success message if the user already has an active subscription.
+  //   if (data.subscriptions.length) {
+  //     setSubscriptionsQueryIsLoading(false);
 
-      return;
-    }
+  //     return;
+  //   }
 
-    window.location.replace(`${env.BASE_URL}/checkout/${user.id}`);
-  };
+  //   window.location.replace(`${env.BASE_URL}/checkout/${user.id}`);
+  // };
 
-  useEffect(() => {
-    if (!auth.user) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (!auth.user) {
+  //     return;
+  //   }
 
-    redirectIfNotSubsribed(auth.user);
-  }, [auth.user]);
+  //   redirectIfNotSubsribed(auth.user);
+  // }, [auth.user]);
 
   if (auth.isLoading) {
     return null;
   }
 
   return auth.user ? (
-    subscriptionsQueryIsLoading ? null : (
-      <App />
-    )
+    <App />
   ) : (
     <Center h="100%">
       <Card w={400} px={40} py={32} shadow="md" withBorder>

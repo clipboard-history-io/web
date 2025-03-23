@@ -1,5 +1,5 @@
 import { Button, Group, Stack, Text, Title } from "@mantine/core";
-import { IconCloud } from "@tabler/icons-react";
+import { IconCloud, IconWifiOff } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 
 import { CommonActionIcon } from "~popup/components/CommonActionIcon";
@@ -20,53 +20,16 @@ export const CloudPage = () => {
   const entryIdToTags = useEntryIdToTags();
   const subscriptionsQuery = useSubscriptionsQuery();
 
-  // TODO: Offline.
   if (auth.user && connectionStatus === "closed") {
     return (
       <EntryList
         noEntriesOverlay={
           <Stack align="center" spacing="xs" p="xl">
-            <Title order={4}>Optionally Sync Your Clipboard History Everywhere</Title>
+            <IconWifiOff size="1.125rem" />
+            <Title order={4}>You're Offline</Title>
             <Text size="sm" w={500} align="center">
-              Privately and securely sync your clipboard history across all your devices!
+              Connect to the internet to access Clipboard History IO Pro.
             </Text>
-            <Button
-              size="xs"
-              mt="xs"
-              component="a"
-              // TODO: Add correct link here.
-              // href={chrome.runtime.getURL("/tabs/sign-in.html")}
-              target="_blank"
-            >
-              Get Started
-            </Button>
-          </Stack>
-        }
-        entries={[]}
-      />
-    );
-  }
-
-  // TODO: Highlight mobile app.
-  if (!subscriptionsQuery.data?.subscriptions.length) {
-    return (
-      <EntryList
-        noEntriesOverlay={
-          <Stack align="center" spacing="xs" p="xl">
-            <Title order={4}>Optionally Sync Your Clipboard History Everywhere</Title>
-            <Text size="sm" w={500} align="center">
-              Privately and securely sync your clipboard history across all your devices!
-            </Text>
-            <Button
-              size="xs"
-              mt="xs"
-              component="a"
-              // TODO: Add correct link here.
-              // href={chrome.runtime.getURL("/tabs/sign-in.html")}
-              target="_blank"
-            >
-              Get Started
-            </Button>
           </Stack>
         }
         entries={[]}
@@ -77,22 +40,35 @@ export const CloudPage = () => {
   return (
     <EntryList
       noEntriesOverlay={
-        search.length === 0 ? (
-          <NoEntriesOverlay
-            title="You have no items stored in the cloud"
-            subtitle={
-              <Group align="center" spacing={0}>
-                <Text>Store an item in the cloud by clicking on</Text>
-                <CommonActionIcon>
-                  <IconCloud size="1rem" />
-                </CommonActionIcon>
-              </Group>
-            }
-            description="Items stored in the cloud can be accessed from other devices"
-          />
-        ) : (
-          <NoEntriesOverlay title={`No items found for "${search}"`} />
-        )
+        <Stack align="center" spacing="xs" p="xl">
+          <Title order={4}>You have no items stored in the cloud</Title>
+          <Text size="sm" w={500} align="center">
+            Install a Clipboard History IO browser extension to manage your computer's clipboard
+            history and store select items in the cloud.
+          </Text>
+          <Group>
+            <Button
+              color="blue"
+              size="xs"
+              mt="xs"
+              component="a"
+              href="https://chromewebstore.google.com/detail/clipboard-history-io-secu/ombhfdknibjljckajldielimdjcomcek"
+              target="_blank"
+            >
+              Add to Chrome
+            </Button>
+            <Button
+              color="red"
+              size="xs"
+              mt="xs"
+              component="a"
+              href="https://addons.mozilla.org/en-US/firefox/addon/clipboard-history-io"
+              target="_blank"
+            >
+              Add to Firefox
+            </Button>
+          </Group>
+        </Stack>
       }
       entries={entries.filter(
         (entry) =>
