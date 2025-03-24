@@ -1,5 +1,6 @@
 import {
   ActionIcon,
+  Box,
   Button,
   Card,
   Divider,
@@ -14,6 +15,7 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   IconCloud,
   IconExternalLink,
@@ -44,6 +46,8 @@ import { refreshTokenAtom, searchAtom, tabAtom } from "./states/atoms";
 
 export const App = () => {
   // useApp();
+
+  const isMobile = useMediaQuery("(max-width: 450px)");
 
   const theme = useMantineTheme();
 
@@ -82,7 +86,7 @@ export const App = () => {
   }
 
   return (
-    <Card h={isFloatingPopup ? "100%" : 600} w={isFloatingPopup ? "100%" : 700} miw={500} p="sm">
+    <Card h={isFloatingPopup ? "100%" : 600} w={isFloatingPopup ? "100%" : 700} p="sm">
       <Stack h="100%" spacing="sm">
         <Group align="center" position="apart">
           <Group align="center" spacing="xs">
@@ -198,7 +202,7 @@ export const App = () => {
             size="xs"
             value={search}
             onChange={(e) => setSearch(e.currentTarget.value)}
-            w={240}
+            w={isMobile ? "100%" : 240}
             sx={{
               ".mantine-Input-input": {
                 borderColor: defaultBorderColor(theme),
@@ -213,6 +217,7 @@ export const App = () => {
             value={tab}
             onChange={(newTab) => setTab(Tab.parse(newTab))}
             size="xs"
+            w={isMobile ? "100%" : undefined}
             color={match(tab)
               .with(Tab.Enum.All, () => "indigo.5")
               .with(Tab.Enum.Favorites, () => "yellow.5")
@@ -221,7 +226,7 @@ export const App = () => {
             data={[
               {
                 label: (
-                  <Group align="center" spacing={4} noWrap>
+                  <Group align="center" position="center" spacing={4} noWrap>
                     <IconCloud size="1rem" />
                     <Text>Cloud</Text>
                   </Group>
@@ -230,7 +235,7 @@ export const App = () => {
               },
               {
                 label: (
-                  <Group align="center" spacing={4} noWrap>
+                  <Group align="center" position="center" spacing={4} noWrap>
                     <IconStar size="1rem" />
                     <Text>Favorites</Text>
                   </Group>
